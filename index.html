@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mohammed Abdullah - IT Infrastructure Engineer specializing in Cloud Solutions, VoIP Architecture, and DevOps">
+    <meta name="keywords" content="Cloud Engineer, AWS, Azure, DevOps, VoIP, Avaya, Infrastructure">
+    <meta name="author" content="Mohammed Abdullah">
+    <title>Mohammed Abdullah - Cloud Solutions Architect</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0077b5;
+            --accent-color: #ff6b35;
+            --text-light: #6c757d;
+            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="dark"] {
+            --primary-color: #00d4ff;
+            --secondary-color: #4dabf7;
+            --accent-color: #ff8cc8;
+            --text-light: #adb5bd;
+            --gradient-bg: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            transition: var(--transition);
+            background: var(--bs-body-bg);
+        }
+
+        /* Navigation */
+        .navbar {
+            backdrop-filter: blur(20px);
+            background: rgba(var(--bs-body-bg-rgb), 0.8) !important;
+            border-bottom: 1px solid rgba(var(--bs-border-color-rgb), 0.2);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .professional-headline {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0" stop-color="rgba(255,255,255,0.1)"/><stop offset="1" stop-color="transparent"/></radialGradient></defs><g opacity="0.3"><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="400" r="150" fill="url(%23a)"/><circle cx="400" cy="800" r="120" fill="url(%23a)"/></g></svg>') no-repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            object-fit: cover;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content {
+            color: white;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .animated-bio {
+            min-height: 80px;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bio-text {
+            opacity: 0;
+            transition: all 0.8s ease-in-out;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .bio-text.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 0;
+            background: var(--bs-body-bg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--bs-body-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .project-card {
+            background: var(--bs-body-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(var(--bs-border-color-rgb), 0.1);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card-body {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .project-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            font-weight: 500;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .project-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .professional-headline {
+                font-size: 0.8rem;
+            }
+
+            .bio-text {
+                padding: 0 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="navbar-brand text-center mx-auto">
+                <div>Mohammed Abdullah</div>
+                <div class="professional-headline">Cloud Solutions Architect | Avaya Specialist | AWS & Azure Expert</div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero" role="banner">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="hero-content fade-in">
+                            <img src="myphoto.jpeg" alt="Mohammed Abdullah - Professional headshot" class="profile-photo mb-4" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjNjY3ZWVhIiByeD0iMTAwIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTUwIDEzNUM1MCA5NS44MTc2IDc1LjgxNzYgNzAgMTAwIDcwQzEyNC4xODIgNzAgMTUwIDk1LjgxNzYgMTUwIDEzNVYyMDBINTBWMTM1WiIgZmlsbD0id2hpdGUiLz4KPHN2Zz4='; this.alt='Default profile placeholder';">
+                            <h1 class="hero-name">Mohammed Abdullah</h1>
+                            <p class="hero-tagline">Crafting Enterprise Cloud Solutions & VoIP Architectures</p>
+                            <div class="animated-bio" id="animatedBio" role="region" aria-label="Professional biography" aria-live="polite">
+                                <!-- Bio sentences will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2 class="section-title">GitHub Projects</h2>
+                <div class="row g-4" id="projectsContainer">
+                    <!-- Projects will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <h3 class="mb-3">Let's Connect</h3>
+            <div class="social-links" role="navigation" aria-label="Social media links">
+                <a href="https://www.linkedin.com/in/ab-cloud-dev/" class="social-link" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/Ab-Cloud-dev" class="social-link" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:mohammed.abdullah700@gmail.com" class="social-link" aria-label="Email contact">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.credly.com/users/abdullah-cert" class="social-link" aria-label="Credly certifications" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-credly" aria-hidden="true"></i>
+                </a>
+            </div>
+            <p class="mb-0">&copy; 2025 Mohammed Abdullah. All rights reserved.</p>
+            <p class="mt-2 opacity-75">Open to collaboration and exciting opportunities</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Projects data
+        const projects = [
+            {
+                name: "CI/CD Pipeline with Jenkins, Kubernetes, and Ansible",
+                description: "Robust CI/CD pipeline implementation automating build, test, and deployment processes for containerized applications. Demonstrates end-to-end software delivery using Jenkins, Kubernetes, and Ansible for reliable and efficient deployment workflows.",
+                github: "https://github.com/Ab-Cloud-dev/CI-CD-Pipeline-with-Jenkins-Kubernetes-and-Ansible",
+                gif: "https://github.com/Ab-Cloud-dev/CI-CD-Pipeline-with-Jenkins-Kubernetes-and-Ansible/blob/main/images/Recording%202025-09-18%20195708.gif?raw=true"
+            },
+            {
+                name: "100-Days-Of-DevOps-KodeKloud-Solutions-Explanation",
+                description: "A comprehensive personal and community challenge documenting 100 days of DevOps learning. Built around KodeKloud's DevOps track, featuring daily task completions, detailed explanations, and real-world application examples of DevOps tools, concepts, and best practices.",
+                github: "https://github.com/Ab-Cloud-dev/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation"
+            },
+            {
+                name: "AWS DevOps & Infrastructure Automation",
+                description: "Comprehensive showcase featuring Kubernetes 2048 Game Deployment using EKS Fargate, Enterprise Application Migration to AWS, Automated EBS Backup using Lambda, and S3 event-driven File Transfer Automation.",
+                github: "https://github.com/Ab-Cloud-dev/AWS-Projects"
+            },
+            {
+                name: "Packer Golden Images",
+                description: "Automated AMI creation pipeline for enterprise workloads with security hardening, automated patching, custom web app baking, and CI/CD pipeline integration using Packer and Ansible.",
+                github: "https://github.com/Ab-Cloud-dev/Custom-AMI-Packer"
+            },
+            {
+                name: "Cloud Infrastructure Templates",
+                description: "Production-ready Terraform modules and templates for AWS and Azure deployments, featuring best practices for security, scalability, and maintainability in enterprise environments.",
+                github: "https://github.com/Ab-Cloud-dev"
+            }
+        ];
+
+        // Bio sentences with colors
+        const bioSentences = [
+            { text: "🚀 IT Infrastructure Engineer with 8+ years specializing in enterprise cloud solutions and VoIP architectures.", color: "#00d4ff" },
+            { text: "☁️ AWS & Azure certified professional with expertise in scalable infrastructure design and deployment.", color: "#ff6b35" },
+            { text: "📞 Avaya specialist managing 24/7 support for global enterprise clients with 99.9% uptime.", color: "#4dabf7" },
+            { text: "🔧 DevOps enthusiast automating infrastructure with Terraform, Packer, and Ansible for zero-downtime deployments.", color: "#28a745" },
+            { text: "🛡️ Network security expert implementing SSL/TLS, SRTP protocols for enterprise-grade communications.", color: "#dc3545" },
+            { text: "🎯 Promoted from contractor to direct hire at Avaya based on exceptional performance and technical excellence.", color: "#6f42c1" },
+            { text: "📚 Currently pursuing Post Graduate Diploma in Cloud Computing & DevOps from IIT Roorkee.", color: "#fd7e14" },
+            { text: "🌟 Passionate about mentoring and contributing to the cloud community through open-source projects.", color: "#20c997" }
+        ];
+
+        let currentBioIndex = 0;
+
+        // Theme management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Bio animation
+        function createBioElements() {
+            const bioContainer = document.getElementById('animatedBio');
+            bioSentences.forEach((sentence, index) => {
+                const bioElement = document.createElement('div');
+                bioElement.className = 'bio-text';
+                bioElement.textContent = sentence.text;
+                bioElement.style.color = sentence.color;
+                bioElement.setAttribute('data-index', index);
+                bioContainer.appendChild(bioElement);
+            });
+        }
+
+        function animateBio() {
+            const bioElements = document.querySelectorAll('.bio-text');
+
+            // Remove active class from all
+            bioElements.forEach(el => el.classList.remove('active'));
+
+            // Add active class to current
+            bioElements[currentBioIndex].classList.add('active');
+
+            // Move to next sentence
+            currentBioIndex = (currentBioIndex + 1) % bioSentences.length;
+        }
+
+        // Projects rendering
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+
+            projects.forEach(project => {
+                const projectCol = document.createElement('div');
+                projectCol.className = 'col-md-4 mb-4';
+
+                const gifSection = project.gif ? `
+                    <div class="project-gif mb-3">
+                        <img src="${project.gif}" alt="${project.name} demonstration" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                    </div>
+                ` : '';
+
+                projectCol.innerHTML = `
+                    <article class="project-card">
+                        <div class="project-card-body">
+                            ${gifSection}
+                            <h3 class="project-title">${project.name}</h3>
+                            <p class="project-description">${project.description}</p>
+                            <a href="${project.github}" class="project-btn" target="_blank" rel="noopener noreferrer" aria-label="View ${project.name} on GitHub">
+                                <i class="fab fa-github me-2" aria-hidden="true"></i>View on GitHub
+                            </a>
+                        </div>
+                    </article>
+                `;
+
+                container.appendChild(projectCol);
+            });
+        }
+
+        // Smooth scrolling for internal links
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Intersection Observer for animations
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observe project cards
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.querySelectorAll('.project-card').forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        observer.observe(card);
+                    });
+                }, 100);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme
+            initializeTheme();
+
+            // Create bio elements and start animation
+            createBioElements();
+            animateBio(); // Start immediately
+            window.bioInterval = setInterval(animateBio, 3000); // Continue every 3 seconds
+
+            // Render projects
+            renderProjects();
+
+            // Initialize other features
+            initSmoothScrolling();
+            initScrollAnimations();
+
+            // Add event listeners
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Keyboard navigation for theme toggle
+            document.getElementById('themeToggle').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
+        });
+
+        // Handle visibility change to pause/resume animations
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Pause animations when tab is not visible
+                clearInterval(window.bioInterval);
+            } else {
+                // Resume animations when tab becomes visible
+                window.bioInterval = setInterval(animateBio, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
