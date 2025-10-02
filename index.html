@@ -422,7 +422,8 @@
             {
                 name: "AWS DevOps & Infrastructure Automation",
                 description: "Comprehensive showcase featuring Kubernetes 2048 Game Deployment using EKS Fargate, Enterprise Application Migration to AWS, Automated EBS Backup using Lambda, and S3 event-driven File Transfer Automation.",
-                github: "https://github.com/Ab-Cloud-dev/AWS-Projects"
+                github: "https://github.com/Ab-Cloud-dev/AWS-Projects",
+                image: "https://raw.githubusercontent.com/Ab-Cloud-dev/Ab-Cloud-dev.github.io/refs/heads/main/Screenshot_2.png"
             },
             {
                 name: "Packer Golden Images",
@@ -511,10 +512,17 @@
                     </div>
                 ` : '';
 
+                const imageSection = project.image ? `
+                    <div class="project-image mb-3">
+                        <img src="${project.image}" alt="${project.name} screenshot" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                    </div>
+                ` : '';
+
                 projectCol.innerHTML = `
                     <article class="project-card">
                         <div class="project-card-body">
                             ${gifSection}
+                            ${imageSection}
                             <h3 class="project-title">${project.name}</h3>
                             <p class="project-description">${project.description}</p>
                             <a href="${project.github}" class="project-btn" target="_blank" rel="noopener noreferrer" aria-label="View ${project.name} on GitHub">
