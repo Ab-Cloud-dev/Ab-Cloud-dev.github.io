@@ -416,7 +416,7 @@
             {
                 name: "100-Days-Of-DevOps-KodeKloud-Solutions-Explanation",
                 description: "A comprehensive personal and community challenge documenting 100 days of DevOps learning. Built around KodeKloud's DevOps track, featuring daily task completions, detailed explanations, and real-world application examples of DevOps tools, concepts, and best practices.",
-                Solutions: "https://ab-cloud-dev.github.io/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/",
+                github: "https://ab-cloud-dev.github.io/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/",
                 gif: "https://raw.githubusercontent.com/Ab-Cloud-dev/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/refs/heads/main/Task-64-Fix%20Python%20App%20Deployed%20on%20Kubernetes%20Cluster/Scene-gif.gif"
             },
             {
@@ -518,6 +518,11 @@
                     </div>
                 ` : '';
 
+                // Customize button text and icon for the DevOps solutions project
+                const buttonText = project.name === "100-Days-Of-DevOps-KodeKloud-Solutions-Explanation" ? "View Solutions" : "View on GitHub";
+                const buttonIcon = project.name === "100-Days-Of-DevOps-KodeKloud-Solutions-Explanation" ? "fas fa-book-open" : "fab fa-github";
+                const ariaLabel = project.name === "100-Days-Of-DevOps-KodeKloud-Solutions-Explanation" ? `View ${project.name} solutions` : `View ${project.name} on GitHub`;
+
                 projectCol.innerHTML = `
                     <article class="project-card">
                         <div class="project-card-body">
@@ -525,8 +530,8 @@
                             ${imageSection}
                             <h3 class="project-title">${project.name}</h3>
                             <p class="project-description">${project.description}</p>
-                            <a href="${project.github}" class="project-btn" target="_blank" rel="noopener noreferrer" aria-label="View ${project.name} on GitHub">
-                                <i class="fab fa-github me-2" aria-hidden="true"></i>View on GitHub
+                            <a href="${project.github}" class="project-btn" target="_blank" rel="noopener noreferrer" aria-label="${ariaLabel}">
+                                <i class="${buttonIcon} me-2" aria-hidden="true"></i>${buttonText}
                             </a>
                         </div>
                     </article>
