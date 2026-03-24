@@ -2053,8 +2053,9 @@
                 const projectCard = document.createElement('div');
                 projectCard.className = 'project-card animate-on-scroll fade-scale';
                 projectCard.style.transitionDelay = `${index * 75}ms`;
+                const isGif = project.image && project.image.toLowerCase().endsWith('.gif');
                 const imageHtml = project.image
-                    ? `<img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.title)} diagram" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-diagram-project\\'></i>';">`
+                    ? `<img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.title)} diagram"${isGif ? '' : ' loading="lazy"'} onerror="this.parentElement.innerHTML='<i class=\\'fas fa-diagram-project\\'></i>';">`
                     : `<i class="fas fa-diagram-project"></i>`;
                 projectCard.innerHTML = `
                     <div class="project-image">${imageHtml}</div>
