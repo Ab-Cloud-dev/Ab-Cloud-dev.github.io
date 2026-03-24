@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mohammed Abdullah - Cloud Solutions Architect and DevOps Engineer specializing in AWS, Azure, Kubernetes, and Infrastructure Automation">
+    <meta name="description" content="Mohammed Abdullah - Cloud Solutions Engineer and DevOps Engineer specializing in AWS, Azure, Kubernetes, and Infrastructure Automation">
     <meta name="keywords" content="Cloud Engineer, DevOps, AWS, Azure, Kubernetes, Docker, Terraform, Infrastructure as Code">
     <meta name="author" content="Mohammed Abdullah">
     <title>Mohammed Abdullah | Cloud & DevOps Engineer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231E3A8A'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Raleway,sans-serif' font-weight='800' font-size='26' fill='%2310B981'>A</text></svg>">
+
+    <!-- Preload above-the-fold image -->
+    <link rel="preload" as="image" href="myphoto.jpeg">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mohammed Abdullah | Cloud & DevOps Engineer">
+    <meta property="og:description" content="Mohammed Abdullah - Cloud Solutions Engineer and DevOps Engineer specializing in AWS, Azure, Kubernetes, and Infrastructure Automation">
+    <meta property="og:image" content="https://ab-cloud-dev.github.io/myphoto.jpeg">
+    <meta property="og:url" content="https://ab-cloud-dev.github.io">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mohammed Abdullah | Cloud & DevOps Engineer">
+    <meta name="twitter:description" content="Mohammed Abdullah - Cloud Solutions Engineer and DevOps Engineer specializing in AWS, Azure, Kubernetes, and Infrastructure Automation">
+    <meta name="twitter:image" content="https://ab-cloud-dev.github.io/myphoto.jpeg">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -237,9 +256,14 @@
         }
 
         .nav-link:hover,
-        .nav-link:focus {
+        .nav-link:focus,
+        .nav-link.active {
             color: var(--accent-color);
             background: rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-link.active::after {
+            width: 80%;
         }
 
         /* Dark Mode Toggle */
@@ -1235,6 +1259,45 @@
             box-shadow: var(--shadow-xl);
         }
 
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: var(--spacing-sm);
+            padding: 0.4rem 1rem;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.03em;
+        }
+
+        .visitor-counter i {
+            color: var(--pipeline-blue);
+        }
+
+        .open-to-work-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.875rem 2rem;
+            border-radius: var(--radius-full);
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: nodeBlink 1.5s ease-in-out infinite;
+        }
+
         .back-to-top {
             display: inline-block;
             margin-top: var(--spacing-lg);
@@ -1390,6 +1453,12 @@
         </div>
     </nav>
 
+    <noscript>
+        <p style="text-align:center; padding: 2rem; font-family: sans-serif; font-size: 1.1rem;">
+            Please enable JavaScript to view this portfolio.
+        </p>
+    </noscript>
+
     <main id="main-content">
         <section id="home" class="hero" role="banner">
             <div class="hero-content">
@@ -1413,6 +1482,10 @@
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary">See My Projects</a>
                     <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    <div class="open-to-work-badge">
+                        <span class="badge-dot"></span>
+                        Open to Opportunities
+                    </div>
                 </div>
             </div>
         </section>
@@ -1501,6 +1574,7 @@
                     I'm always interested in hearing about new opportunities, collaborations, or just connecting with fellow cloud and DevOps enthusiasts. Feel free to reach out!
                 </p>
                 <div class="contact-info" id="contact-container"></div>
+
             </div>
         </section>
     </main>
@@ -1509,6 +1583,10 @@
         <div class="social-links" id="social-links-container"></div>
         <p>&copy; <span id="current-year"></span> <span id="footer-name"></span>. All rights reserved.</p>
         <p style="opacity: 0.8; margin-top: 0.5rem;">Open to collaboration and exciting opportunities</p>
+        <div class="visitor-counter">
+            <i class="fas fa-eye"></i>
+            <span>Visitors: <span id="visitor-count">...</span></span>
+        </div>
         <a href="#home" class="back-to-top">
             <i class="fas fa-arrow-up"></i> Back to Top
         </a>
@@ -1518,7 +1596,7 @@
         const PORTFOLIO_CONFIG = {
             personal: {
                 name: "Mohammed Abdullah",
-                tagline: "Cloud Solutions Architect | DevOps Engineer | Multi-Cloud Infrastructure Specialist",
+                tagline: "Cloud Solutions Engineer | DevOps Engineer | Multi-Cloud Infrastructure Specialist",
                 about: "Customer-focused Cloud & DevOps Engineer with 6+ years specializing in cloud infrastructure, automation, and enterprise system administration. Proven expertise in deploying AWS/Azure solutions, automating infrastructure with Terraform/Ansible, and integrating unified communications platforms. Strong track record in incident resolution, security implementation, and managing virtualized environments."
             },
             skills: [
@@ -1581,7 +1659,7 @@
             experience: [
                 {
                     date: "March 2025 - August 2025",
-                    title: "Cloud and DevOps Intern",
+                    title: "Freelance Cloud & DevOps Engineer",
                     company: "IntelliPaat Software PvT. Ltd.",
                     location: "Hyderabad",
                     highlights: [
@@ -1721,6 +1799,13 @@
                     verifyUrl: "https://www.credly.com/users/abdullah-cert"
                 },
                 {
+                    name: "Certified Kubernetes Security Specialist",
+                    issuer: "The Linux Foundation",
+                    code: "CKS",
+                    icon: "certs-icons/kubernetes-security-specialist-logo2.png",
+                    verifyUrl: "https://www.credly.com/badges/9e553b56-31cc-4f23-ab83-54611cdce88d/public_url"
+                },
+                {
                     name: "HashiCorp Certified: Terraform Associate (003)",
                     issuer: "HashiCorp",
                     code: "003",
@@ -1857,6 +1942,24 @@
                     date: "2025",
                     excerpt: "Documentation of my comprehensive DevOps learning journey through practical, hands-on challenges and real-world scenarios.",
                     url: "https://ab-cloud-dev.github.io/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/"
+                },
+                {
+                    title: "Kubernetes & CKA Notes",
+                    date: "2025",
+                    excerpt: "Comprehensive notes and study material covering Kubernetes concepts and CKA exam preparation.",
+                    url: "https://docs.google.com/document/d/1syihFmc2q1ch-FisVZcfT9JxDyTmuJGwdqyGXN1dQe8/edit?usp=sharing"
+                },
+                {
+                    title: "Kubernetes Security",
+                    date: "2025",
+                    excerpt: "In-depth notes on Kubernetes security concepts, best practices, and hardening techniques.",
+                    url: "https://docs.google.com/document/d/1DoGYbQJ4D_j-yQRpvERzPjCkwYKJNEFmWHzDoubic1M/edit?usp=sharing"
+                },
+                {
+                    title: "Workings Of Terraform",
+                    date: "2025",
+                    excerpt: "Notes covering Terraform internals, workflows, state management, and infrastructure as code patterns.",
+                    url: "https://docs.google.com/document/d/1goO6PtCz5QVnTrAgP6uj3d-TcBPYX72g7lAij7nnbMM/edit?usp=sharing"
                 }
             ],
             contact: {
@@ -1961,7 +2064,7 @@
             container.innerHTML = '';
             PORTFOLIO_CONFIG.certifications.forEach((cert, index) => {
                 const certCard = document.createElement('div');
-                certCard.className = cert.type === 'kodekloud' ? 'cert-card kodekloud-cert animate-on-scroll fade-scale' : 'cert-card animate-on-scroll fade-scale';
+                certCard.className = cert.isKodekloud ? 'cert-card kodekloud-cert animate-on-scroll fade-scale' : 'cert-card animate-on-scroll fade-scale';
                 certCard.style.transitionDelay = `${index * 50}ms`;
 
                 const iconHtml = cert.icon
@@ -2044,6 +2147,17 @@
             document.getElementById('footer-name').textContent = PORTFOLIO_CONFIG.personal.name;
         }
 
+        function initVisitorCounter() {
+            fetch('https://api.counterapi.dev/v1/ab-cloud-dev-github-io/visits/up')
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('visitor-count').textContent = data.count.toLocaleString();
+                })
+                .catch(() => {
+                    document.getElementById('visitor-count').textContent = '--';
+                });
+        }
+
         function initMobileMenu() {
             const navToggle = document.querySelector('.nav-toggle');
             const navMenu = document.querySelector('.nav-menu');
@@ -2103,6 +2217,23 @@
             });
         }
 
+        function initActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
         function initDarkMode() {
             const themeToggle = document.querySelector('.theme-toggle');
             const themeIcon = themeToggle.querySelector('i');
@@ -2144,6 +2275,8 @@
             initSmoothScroll();
             initScrollAnimations();
             initDarkMode();
+            initActiveNav();
+            initVisitorCounter();
         });
     </script>
 </body>
