@@ -1275,24 +1275,6 @@
             box-shadow: var(--shadow-xl);
         }
 
-        .visitor-counter {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: var(--spacing-sm);
-            padding: 0.4rem 1rem;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            color: rgba(255,255,255,0.85);
-            letter-spacing: 0.03em;
-        }
-
-        .visitor-counter i {
-            color: var(--pipeline-blue);
-        }
-
         .open-to-work-badge {
             display: inline-flex;
             align-items: center;
@@ -2163,17 +2145,6 @@
             document.getElementById('footer-name').textContent = PORTFOLIO_CONFIG.personal.name;
         }
 
-        function initVisitorCounter() {
-            fetch('https://api.counterapi.dev/v1/ab-cloud-dev-github-io/visits/up')
-                .then(r => r.json())
-                .then(data => {
-                    document.getElementById('visitor-count').textContent = data.count.toLocaleString();
-                })
-                .catch(() => {
-                    document.getElementById('visitor-count').textContent = '--';
-                });
-        }
-
         function initMobileMenu() {
             const navToggle = document.querySelector('.nav-toggle');
             const navMenu = document.querySelector('.nav-menu');
@@ -2292,7 +2263,6 @@
             initScrollAnimations();
             initDarkMode();
             initActiveNav();
-            initVisitorCounter();
         });
     </script>
 </body>
