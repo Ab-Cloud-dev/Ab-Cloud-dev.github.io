@@ -27,18 +27,61 @@
     <meta name="twitter:description" content="Mohammed Abdullah - Cloud Solutions Engineer and DevOps Engineer specializing in AWS, Azure, Kubernetes, and Infrastructure Automation">
     <meta name="twitter:image" content="https://ab-cloud-dev.github.io/myphoto.jpeg">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- DNS prefetch: free speed wins on every third-party domain -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://learn.microsoft.com">
+    <link rel="dns-prefetch" href="https://widgets.sociablekit.com">
+    <link rel="dns-prefetch" href="https://hitscounter.dev">
+    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 
-    <!-- Google Fonts - Raleway & Roboto -->
+    <!-- Preconnect: full handshake for the two heaviest critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome: loaded non-render-blocking via print→all swap.
+         The browser fetches it in the background; the noscript tag is a
+         fallback for the rare case JS is disabled. -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+              crossorigin="anonymous">
+    </noscript>
 
     <style>
         /* ============================================
            MODERNIZED PORTFOLIO - 2025 DESIGN SYSTEM
            ============================================ */
+
+        /* === PERFORMANCE: GPU + layout containment === */
+        /* will-change promotes elements to their own compositor layer so
+           animations run on the GPU instead of triggering main-thread repaints. */
+        .hero {
+            will-change: background-position;
+        }
+        .profile-photo {
+            will-change: transform;
+        }
+        /* contain: layout style scopes hover reflows to the card subtree,
+           preventing them from cascading to the rest of the page. */
+        .project-card,
+        .cert-card,
+        .skill-category,
+        .timeline-content,
+        .blog-item,
+        .contact-item {
+            contain: layout style;
+        }
 
         /* === CSS CUSTOM PROPERTIES - DevOps/CI/CD Theme === */
         :root {
@@ -1445,6 +1488,8 @@
         <section id="home" class="hero" role="banner">
             <div class="hero-content">
                 <img src="myphoto.jpeg" alt="Mohammed Abdullah - Professional headshot" class="profile-photo"
+                     fetchpriority="high"
+                     width="220" height="220"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="profile-photo profile-photo-placeholder" style="display: none;">
                     <i class="fas fa-user"></i>
@@ -1495,8 +1540,10 @@
                 <h3 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--primary-color); margin-bottom: var(--spacing-lg);">
                     <i class="fab fa-microsoft"></i> Microsoft Learn Achievements
                 </h3>
-                <div class="microsoft-learn-badge">
-                    <script src="https://learn.microsoft.com/en-us/users/abdullahmohammed-7189/card.js"></script>
+                <div class="microsoft-learn-badge"
+                     id="ms-learn-container"
+                     data-lazy-script="https://learn.microsoft.com/en-us/users/abdullahmohammed-7189/card.js">
+                    <!-- Microsoft Learn badge injected on scroll -->
                 </div>
                 <a href="https://learn.microsoft.com/en-us/users/abdullahmohammed-7189/"
                    style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: var(--radius-md); background: var(--primary-color); color: white; text-decoration: none; font-weight: 600; transition: all var(--transition); margin-top: var(--spacing-md);"
@@ -1513,9 +1560,11 @@
             <h2 class="section-title animate-on-scroll fade-up">Testimonials &amp; Recognition</h2>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); max-width: 1200px; margin: 0 auto;">
-                <div style="min-height: 300px;">
+                <div style="min-height: 300px;"
+                     id="sociablekit-container"
+                     data-lazy-script="https://widgets.sociablekit.com/linkedin-recommendations/widget.js">
                     <div class='sk-ww-linkedin-recommendations' data-embed-id='25609284'></div>
-                    <script src='https://widgets.sociablekit.com/linkedin-recommendations/widget.js' defer></script>
+                    <!-- SociableKit widget injected on scroll -->
                 </div>
 
                 <div>
@@ -2050,7 +2099,7 @@
                 certCard.style.transitionDelay = `${index * 50}ms`;
 
                 const iconHtml = cert.icon
-                    ? `<img src="${escapeHtml(cert.icon)}" alt="${escapeHtml(cert.name)} certification" class="cert-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`
+                    ? `<img src="${escapeHtml(cert.icon)}" alt="${escapeHtml(cert.name)} certification" class="cert-icon-img" loading="lazy" width="110" height="110" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`
                     : '';
 
                 certCard.innerHTML = `
@@ -2149,7 +2198,7 @@
             const navbar = document.querySelector('.navbar');
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
-            });
+            }, { passive: true });
         }
 
         function initSmoothScroll() {
@@ -2230,23 +2279,80 @@
             });
         }
 
+        // ─── Utility: run a callback when the browser is idle.
+        //     requestIdleCallback is not in Safari, so we fall back to a short timeout.
+        const onIdle = typeof requestIdleCallback === 'function'
+            ? (fn) => requestIdleCallback(fn, { timeout: 2000 })
+            : (fn) => setTimeout(fn, 200);
+
+        // ─── Lazy third-party script injection.
+        //     Any element with data-lazy-script="<url>" will have that script
+        //     appended to <body> once the element is 200 px from the viewport.
+        //     Scripts are injected at most once (idempotent Set guard).
+        function initLazyScripts() {
+            const injected = new Set();
+            const containers = document.querySelectorAll('[data-lazy-script]');
+            if (!containers.length) return;
+
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const src = entry.target.dataset.lazyScript;
+                    if (!injected.has(src)) {
+                        injected.add(src);
+                        const s = document.createElement('script');
+                        s.src = src;
+                        document.body.appendChild(s);
+                    }
+                    obs.unobserve(entry.target);
+                });
+            }, { rootMargin: '200px 0px' });
+
+            containers.forEach(el => obs.observe(el));
+        }
+
+        // ─── Pause hero CSS animations when the tab is hidden.
+        //     Saves GPU/battery when the user switches away.
+        function initVisibilityPause() {
+            const hero = document.querySelector('.hero');
+            if (!hero) return;
+            document.addEventListener('visibilitychange', () => {
+                const state = document.hidden ? 'paused' : 'running';
+                hero.style.animationPlayState = state;
+                // Also pause pseudo-element animations via a CSS custom property
+                hero.style.setProperty('--hero-play-state', state);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // ── TIER 1: above-the-fold, runs immediately on DOMContentLoaded.
+            //    These populate the hero and wire up interactive UI before
+            //    anything else touches the main thread.
             populateHero();
             populateAbout();
-            populateSkills();
-            populateExperience();
-            populateProjects();
-            populateCertifications();
-            populateBlog();
-            populateContact();
-            populateSocialLinks();
-            updateFooter();
+            initDarkMode();
             initMobileMenu();
             initNavbarScroll();
             initSmoothScroll();
-            initScrollAnimations();
-            initDarkMode();
-            initActiveNav();
+            initVisibilityPause();
+
+            // ── TIER 2: below-the-fold, deferred to browser idle time.
+            //    requestIdleCallback guarantees the hero finishes painting first.
+            onIdle(() => {
+                populateSkills();
+                populateExperience();
+                populateProjects();
+                populateCertifications();
+                populateBlog();
+                populateContact();
+                populateSocialLinks();
+                updateFooter();
+                // Scroll animations must run after sections are in the DOM
+                initScrollAnimations();
+                initActiveNav();
+                // Lazy-load third-party widget scripts on scroll
+                initLazyScripts();
+            });
         });
     </script>
 
